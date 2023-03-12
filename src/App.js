@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { createBrowserRouter, createRoutesFromElements, Route, Link, Outlet} from 'react-router-dom'
+import Navbar from './components/layout/Navbar'
+//import Home from './src/Home.jsx'
 
 function App() {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path='/' element={<Root />}>
+        <Route index element={<Home/>} />
+        <Route element={<About/>} />
+      </Route>
+    )
+  )
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='flex flex-col justify-between h-screen' >
+      <h1>Hello</h1>
+      <h2>Start your journey</h2>
     </div>
-  );
+  )
 }
 
-export default App;
+const Root = () => {
+  return (
+    <>
+    <div>
+      <Link to="/">Home</Link>
+      <Link to="about">About</Link>
+    </div>
+
+    <div>
+      <Outlet />
+    </div>
+  </>
+  )
+  
+}
+
+
+export default App
