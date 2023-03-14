@@ -1,41 +1,31 @@
 import React from 'react'
-import { createBrowserRouter, createRoutesFromElements, Route, Link, Outlet} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
-//import Home from './src/Home.jsx'
+import Footer from './components/layout/Footer'
+import Home from './pages/Home'
+import About from './pages/About'
+import NotFound from './pages/NotFound'
+
 
 function App() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path='/' element={<Root />}>
-        <Route index element={<Home/>} />
-        <Route element={<About/>} />
-      </Route>
-    )
-  )
-  
+
   return (
     <div className='flex flex-col justify-between h-screen' >
-      <h1>Hello</h1>
-      <h2>Start your journey</h2>
+      <Router>
+        <Navbar />
+        <main className='container mx-auto px-3 pd-12'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/notfound' element={<NotFound />} />
+          <Route path='/*' element={<NotFound />} />
+        </Routes>
+        </main>
+        <Footer />
+        
+      </Router>
     </div>
   )
 }
-
-const Root = () => {
-  return (
-    <>
-    <div>
-      <Link to="/">Home</Link>
-      <Link to="about">About</Link>
-    </div>
-
-    <div>
-      <Outlet />
-    </div>
-  </>
-  )
-  
-}
-
 
 export default App
